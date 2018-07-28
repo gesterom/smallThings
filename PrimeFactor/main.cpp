@@ -8,10 +8,10 @@ int checkPrime( IStream<int>& s, int number ) {
 	while ( true ) {
 		try {
 			int t = s.get();
-			if(number/t < t)
-				return 0;
 			if( number % t == 0 ) {
 				return t;
+			if(number/t < t)
+				return 0;
 			}
 		}
 		catch( EndStreamException * e ) {
