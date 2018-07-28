@@ -86,9 +86,9 @@ class FileStream : public IStream<T> {
 
 			file.seekg( c );
 
-			char* res = new char[sizeof( T )];
-			file.read( res, sizeof( T ) );
-			return *( ( T* )res );
+			T res;
+			file.read( (char*)&res, sizeof( T ) );
+			return res;
 		}
 		else {
 			throw new EndStreamException();
@@ -130,6 +130,7 @@ class BufferedStreamDecorator : public IStream<T> {
 			return res;
 		}
 		catch( EndStreamException* e ) {
+			delete e;
 			return master->get();
 		}
 	}
